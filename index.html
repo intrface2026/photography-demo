@@ -9,6 +9,16 @@
     </script>
     <!-- Start of headStart -->
     <!-- End of headStart -->
+    <script>
+      const OriginalDateTimeFormat = Intl.DateTimeFormat;
+      Intl.DateTimeFormat = function(locales, options) {
+        if (!options) options = {};
+        options.timeZone = 'Asia/Kolkata';
+        return new OriginalDateTimeFormat(locales, options);
+      };
+      Intl.DateTimeFormat.prototype = OriginalDateTimeFormat.prototype;
+      Intl.DateTimeFormat.supportedLocalesOf = OriginalDateTimeFormat.supportedLocalesOf;
+    </script>
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content="Custom" />
     <title>
@@ -157,17 +167,13 @@
     <!-- End of headEnd -->
     <style>
       .framer-styles-preset-19z65ec {
-        transform: scale(0.85) translateX(-3%) !important;
+        transform: scale(0.85) translateX(-8%) !important;
         transform-origin: center center !important;
         white-space: nowrap !important;
-        letter-spacing: 1px !important;
-        text-align: center !important;
-        width: 100% !important;
-        display: block !important;
       }
       @media (max-width: 810px) {
         .framer-styles-preset-19z65ec {
-          transform: scale(0.75) translateX(-3%) !important;
+          transform: scale(0.75) translateX(-12%) !important;
         }
       }
     </style>
@@ -274,7 +280,7 @@
               <div class="framer-37c9gv" data-framer-name="location" style="transform:translate(-50%, -50%)">
                 <div class="framer-1wtuhrd" style="--extracted-r6o4lv:var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102));--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none" data-framer-component-type="RichTextContainer">
                   <p class="framer-text framer-styles-preset-m17kc9" data-styles-preset="gL3X8czuG" dir="auto" style="--framer-text-color:var(--extracted-r6o4lv, var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102)))">
-                    London
+                    Ahmedabad
                   </p>
                 </div>
                 <div class="framer-zf1okb" style="--extracted-1w1cjl5:var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102));--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none" data-framer-component-type="RichTextContainer">
@@ -9875,7 +9881,7 @@
               <div class="framer-37c9gv" data-framer-name="location" style="transform:translate(-50%, -50%)">
                 <div class="framer-1wtuhrd" style="--extracted-r6o4lv:var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102));--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none" data-framer-component-type="RichTextContainer">
                   <p class="framer-text framer-styles-preset-m17kc9" data-styles-preset="gL3X8czuG" dir="auto" style="--framer-text-color:var(--extracted-r6o4lv, var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102)))">
-                    London
+                    Ahmedabad
                   </p>
                 </div>
                 <div class="framer-zf1okb" style="--extracted-1w1cjl5:var(--token-59e73373-0385-444e-92e5-e440e9e06a9a, rgb(102, 102, 102));--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none" data-framer-component-type="RichTextContainer">
@@ -14743,6 +14749,9 @@
             if (node.textContent.includes('noirlumier')) {
               node.textContent = node.textContent.replace(/noirlumier/g, 'parthsuthar');
             }
+            if (node.textContent.includes('London')) {
+              node.textContent = node.textContent.replace(/London/g, 'Ahmedabad');
+            }
           } else if (node.nodeType === Node.ELEMENT_NODE) {
             if (node.hasAttribute && node.hasAttribute('href')) {
               let href = node.getAttribute('href');
@@ -14763,7 +14772,7 @@
         const observer = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {
             if (mutation.type === 'characterData') {
-              if (mutation.target.textContent.includes('Noir Lumier') || mutation.target.textContent.includes('noirlumier')) {
+              if (mutation.target.textContent.includes('Noir Lumier') || mutation.target.textContent.includes('noirlumier') || mutation.target.textContent.includes('London')) {
                  replaceText(mutation.target);
               }
             } else if (mutation.type === 'childList') {
